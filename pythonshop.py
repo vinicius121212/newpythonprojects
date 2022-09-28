@@ -13,22 +13,41 @@ menu.insert(0, {"quit":"quits"})
 
 #iterates the menu
 
-for i in range(len(menu)):
-	for key, value in menu[i].items():
-		print(i, key)
+def print_menu():
+
+	for i in range(len(menu)):
+
+		for key, value in menu[i].items():
+			print(i, key)
+
+#print menu
+print_menu()
 
 #checks for order input
 while True:
 	try:
 		order = int(input("what are you interested in"))
-		order = (menu[order].items)
+		orderitem = (menu[order].items)
+		def itemname():
+			for key , value in menu[order].items():
+				print(key)
 
-		for key, value in order():
+#prints price
+		for key, value in orderitem():
 			print("$", value)
 			amount = int(input("how much do you want?"))
 			price = amount * value 
-			print(price)
-	
+			print("the price is $", price ,)
+			#creates a cart with customer items
+			menu.append( {"cart" : [menu[order].keys() , amount , price]})
+			for key , value in menu[-1].items():
+				print (value)
+
+			print_menu()
+
+#validates user input	
 	except ValueError:
 		print("use numbers only")
 
+	except IndexError:
+		print(f"item not avaliable, insert items from 0 to", len(menu))
